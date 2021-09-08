@@ -27,54 +27,7 @@ function MapKey(group, key, action, description)
 	execute "nnoremap <silent> " . a:group['sequence'] . a:key . " " . a:action
 endfunction
 
-" Setup runtimepath for dein-vim to work on both Windows and Linux
-if has('win64') || has('win32') || has('win16')
-	" Use expand because plugin_dir is eventually used in a git command and
-	" git doesn't handle ~ for HOME on Windows.
-	let plugin_dir=expand('~/AppData/Local/dein')
-else
-	let plugin_dir='~/.local/share/dein'
-endif
-
-let dein_dir=plugin_dir . '/repos/github.com/Shougo/dein.vim'
-let &runtimepath=&runtimepath . ',' . dein_dir
-
-" Check to see if dein-vim is installed, if not bootstrap the plugin manager
-if empty(glob(dein_dir))
-	echom "Checking out dein-vim to " . dein_dir
-	execute '!git clone https://github.com/Shougo/dein.vim ' . dein_dir
-endif
-
-" Begin plugin section here
-call dein#begin(plugin_dir)
-	call dein#add(dein_dir)
-
-	" Add plugins here
-	call dein#add('wsdjeg/dein-ui.vim')
-	call dein#add('tomasr/molokai')
-	call dein#add('mhinz/vim-startify')
-	call dein#add('ryanoasis/vim-devicons')
-	call dein#add('vim-airline/vim-airline-themes')
-	call dein#add('vim-airline/vim-airline')
-	call dein#add('liuchengxu/vim-which-key')
-	call dein#add('scrooloose/nerdtree')
-	call dein#add('nvim-lua/plenary.nvim')
-	call dein#add('nvim-telescope/telescope.nvim')
-
-	" Initialize plugin system
-call dein#end()
-
-" Install the plugins during initial startup, it will take a while because we have to do them
-" synchronusly so that they finish before we can configure them below.
-if dein#check_install()
-	echom "Installing plugins during first-time startup.  This may take awhile..."
-	let g:dein#install_max_processes=1
-	call dein#install()
-endif
-
-" Required for dein
-filetype plugin indent on
-syntax enable
+call LoadPlugins()
 
 " Set encoding to UTF-8
 set encoding=UTF-8
@@ -83,7 +36,7 @@ set encoding=UTF-8
 set clipboard^=unnamed,unnamedplus
 
 " Set colorscheme
-colorscheme molokai
+"colorscheme molokai
 
 " Set default font (make sure to use a Nerd Font)
 set guifont=Hack\ NF:h10
