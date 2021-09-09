@@ -10,8 +10,16 @@
 "   * Hack fonts installed (Nerd Font distribution)
 "   * RipGrep in PATH (required for Telescope)
 
+" Use SPC as <leader> and , as <localleader>
+call keys#set_leader("\<Space>")
+call keys#set_local_leader(",")
+
 call plugin#add("vwk")
 call plugin#add("theme")
+call plugin#add("airline")
+call plugin#add("devicons")
+call plugin#add("startify")
+call plugin#add("nerdtree")
 
 call plugin#load_all()
 
@@ -49,28 +57,12 @@ set expandtab
 " Setup keyboard shortcuts
 " Use 'jk' for <ESC>
 inoremap jk <ESC>
-" Use SPC as <leader> and , as <localleader>
-let g:mapleader="\<Space>"
-let g:maplocalleader=','
-
-" Configure vim-which-key
-set timeoutlen=500
-noremap <silent> <leader> :<c-u>WhichKey '<leader>'<CR>
-nnoremap <silent> <localleader> :<c-u>WhichKey ','<CR>
-let root = keys#create_root('<Space>') " NOTE: Cannot use '<leader>' in this function call.  VWK limitation.
-
-" Configure Airline
-let g:airline_powerline_fonts=1
-
-" Configure NERDTree
-let file_group = keys#map_group(root, 'f', 'Files')
-call keys#map_key(file_group, 't', ':NERDTreeToggle<CR>', 'toggle-file-browser')
 
 " Configure Telescope
-let search_group = keys#map_group(root, 's', 'Fuzzy-Search')
-call keys#map_key(search_group, 'f', ':Telescope find_files<CR>', 'file-names')
-call keys#map_key(search_group, 'G', ':Telescope git_files<CR>', 'git-file-names')
-call keys#map_key(search_group, 's', ':Telescope grep_string<CR>', 'string')
-call keys#map_key(search_group, 'g', ':Telescope live_grep<CR>', 'grep')
+"let search_group = keys#map_group(root, 's', 'Fuzzy-Search')
+"call keys#map_key(search_group, 'f', ':Telescope find_files<CR>', 'file-names')
+"call keys#map_key(search_group, 'G', ':Telescope git_files<CR>', 'git-file-names')
+"call keys#map_key(search_group, 's', ':Telescope grep_string<CR>', 'string')
+"call keys#map_key(search_group, 'g', ':Telescope live_grep<CR>', 'grep')
 
 " vim: set noexpandtab:
