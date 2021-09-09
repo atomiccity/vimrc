@@ -66,7 +66,7 @@ function plugin#load_all()
 
     " Call each plugin's config
     for c in s:config_list
-        echom "Configuring plugin " . p . "..."
+        echom "Configuring plugin " . c . "..."
         exec "call " . c
     endfor
 endfunction
