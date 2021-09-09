@@ -10,24 +10,10 @@
 "   * Hack fonts installed (Nerd Font distribution)
 "   * RipGrep in PATH (required for Telescope)
 
-function CreateKeyRoot(key)
-	let var_name = "g:which_key_map"
-	call which_key#register(a:key, var_name)
-	let {var_name} = { 'sequence': a:key }
-	return {var_name}
-endfunction
+call plugin#add("vwk")
+call plugin#add("theme")
 
-function MapGroup(parent, key, description)
-	let a:parent[a:key] = { 'name': '+' . a:description, 'sequence': a:parent['sequence'] . a:key }
-	return a:parent[a:key]
-endfunction
-
-function MapKey(group, key, action, description)
-	let a:group[a:key] = a:description
-	execute "nnoremap <silent> " . a:group['sequence'] . a:key . " " . a:action
-endfunction
-
-call LoadPlugins()
+call plugin#load_all()
 
 " Set encoding to UTF-8
 set encoding=UTF-8
@@ -71,20 +57,20 @@ let g:maplocalleader=','
 set timeoutlen=500
 noremap <silent> <leader> :<c-u>WhichKey '<leader>'<CR>
 nnoremap <silent> <localleader> :<c-u>WhichKey ','<CR>
-let root = CreateKeyRoot('<Space>') " NOTE: Cannot use '<leader>' in this function call.  VWK limitation.
+let root = keys#create_root('<Space>') " NOTE: Cannot use '<leader>' in this function call.  VWK limitation.
 
 " Configure Airline
 let g:airline_powerline_fonts=1
 
 " Configure NERDTree
-let file_group = MapGroup(root, 'f', 'Files')
-call MapKey(file_group, 't', ':NERDTreeToggle<CR>', 'toggle-file-browser')
+let file_group = keys#map_group(root, 'f', 'Files')
+call keys#map_key(file_group, 't', ':NERDTreeToggle<CR>', 'toggle-file-browser')
 
 " Configure Telescope
-let search_group = MapGroup(root, 's', 'Fuzzy-Search')
-call MapKey(search_group, 'f', ':Telescope find_files<CR>', 'file-names')
-call MapKey(search_group, 'G', ':Telescope git_files<CR>', 'git-file-names')
-call MapKey(search_group, 's', ':Telescope grep_string<CR>', 'string')
-call MapKey(search_group, 'g', ':Telescope live_grep<CR>', 'grep')
+let search_group = keys#map_group(root, 's', 'Fuzzy-Search')
+call keys#map_key(search_group, 'f', ':Telescope find_files<CR>', 'file-names')
+call keys#map_key(search_group, 'G', ':Telescope git_files<CR>', 'git-file-names')
+call keys#map_key(search_group, 's', ':Telescope grep_string<CR>', 'string')
+call keys#map_key(search_group, 'g', ':Telescope live_grep<CR>', 'grep')
 
 " vim: set noexpandtab:
