@@ -3,10 +3,10 @@ function plugins#vwk#register()
 endfunction
 
 function plugins#vwk#config()
-    call which_key#register(g:mapleader, keys#leader())
-    call which_key#register(g:maplocalleader, keys#local_leader())
+    call which_key#register(g:mapleader, keys#leader_var())
+    call which_key#register(g:maplocalleader, keys#local_leader_var())
 
     set timeoutlen=500
-    noremap <silent> <leader> :<c-u>WhichKey '<leader>'<CR>
+    nnoremap <silent> <leader> :<c-u>WhichKey '<leader>'<CR>
     nnoremap <silent> <localleader> :<c-u>WhichKey ','<CR>
 endfunction

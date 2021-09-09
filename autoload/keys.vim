@@ -1,26 +1,27 @@
-let s:leader_var = "g:which_key_leader_map"
-let s:local_leader_var = "g:which_key_ll_map"
-
 function keys#set_leader(key)
 	let g:mapleader=a:key
-	" ERROR: Don't have access to which_key yet
-	"call which_key#register(a:key, s:leader_var)
-	let {s:leader_var} = { 'sequence': a:key }
 endfunction
 
 function keys#set_local_leader(key)
 	let g:maplocalleader=a:key
-	" ERROR: Don't have access to which_key yet
-	"call which_key#register(a:key, s:local_leader_var)
-	let {s:local_leader_var} = { 'sequence': a:key }
+endfunction
+
+function keys#leader_var()
+	return "g:which_key_leader_map"
+endfunction
+
+function keys#local_leader_var()
+	return "g:which_key_ll_map"
 endfunction
 
 function keys#leader()
-	return {s:leader_var}
+	let g:which_key_leader_map = get(g:, 'which_key_leader_map', { 'sequence': '<leader>' })
+	return g:which_key_leader_map
 endfunction
 
 function keys#local_leader()
-	return {s:local_leader_var}
+	let g:which_key_ll_map = get(g:, 'which_key_ll_map', { 'sequence': '<localleader>' })
+	return g:which_key_ll_map
 endfunction
 
 function keys#map_group(parent, key, description)
