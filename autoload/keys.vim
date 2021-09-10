@@ -15,8 +15,8 @@ function keys#local_leader_var()
 endfunction
 
 function keys#leader()
-	let g:which_key_leader_map = get(g:, 'which_key_leader_map', { 'sequence': '<leader>' })
-	return g:which_key_leader_map
+    let g:which_key_leader_map = get(g:, 'which_key_leader_map', { 'sequence': { 'name': 'which_key_ignore', 'value': '<leader>' } })
+    return g:which_key_leader_map
 endfunction
 
 function keys#local_leader()
@@ -25,12 +25,12 @@ function keys#local_leader()
 endfunction
 
 function keys#map_group(parent, key, description)
-	let a:parent[a:key] = { 'name': '+' . a:description, 'sequence': a:parent['sequence'] . a:key }
+    let a:parent[a:key] = { 'name': '+' . a:description, 'sequence': { 'name': 'which_key_ignore', 'value': a:parent['sequence']['value'] . a:key } }
 	return a:parent[a:key]
 endfunction
 
 function keys#map_key(group, key, action, description)
 	let a:group[a:key] = a:description
-	execute "nnoremap <silent> " . a:group['sequence'] . a:key . " " . a:action
+	execute "nnoremap <silent> " . a:group['sequence']['value'] . a:key . " " . a:action
 endfunction
 
