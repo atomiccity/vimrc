@@ -55,14 +55,28 @@ function plugin#load_all()
     " See if plugins need to be installed.  Install if so.
     if dein#check_install()
         echom "Installing plugins during first-time startup.  This may take a while..."
-        " Disable async installs because we can't continue with startup until
-        " all plugins are installed
-        let g:dein#install_max_processes = 1
-        call dein#install()
+        call s:InstallPlugins()
     endif
 
     " Call each plugin's config
     for c in s:config_list
         exec "call " . c
     endfor
+endfunction
+
+function s:InstallPlugins()
+    let g:spacevim_plugin_manager_processes = get(g:, 'spacevim_plugin_manager_processes', 8)
+    let g:spacevim_plugin_manager = get(g:, 'spacevim_plugin_manager', 'dein')
+    call SpaceVim#commands#install_plugin()
+
+    " Need to wait until installation is done so initalization can complete
+    " TODO: Replace this wait loop with a synchronous GUI using SpaceVim library as guide
+    let count = 0
+    while count < 15
+        sleep 500m
+        redraw
+        let count += 1
+    endwhile
+
+    "call dein#recache_runtimepath()
 endfunction
