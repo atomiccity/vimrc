@@ -2,7 +2,6 @@ let s:config_list = []
 let s:plugin_list = []
 
 function plugin#register(plugin_name)
-    echom "Registering plugin " . a:plugin_name
     call add(s:plugin_list, a:plugin_name)
 endfunction
 
@@ -24,7 +23,6 @@ function plugin#add(plugin_name)
 endfunction
 
 function plugin#load_all()
-    echom "Loading plugins..."
     if has('win64') || has('win32') || has('win16')
         " Use expand because plugin_dir is eventually used in a git command
         " and git doesn't handle ~ for HOME on Windows.
@@ -49,7 +47,6 @@ function plugin#load_all()
 
     " Call dein#add on all plugins here
     for p in plugin#list_plugins()
-        echom "Adding plugin " . p . "..."
         call dein#add(p)
     endfor
 
@@ -66,7 +63,6 @@ function plugin#load_all()
 
     " Call each plugin's config
     for c in s:config_list
-        echom "Configuring plugin " . c . "..."
         exec "call " . c
     endfor
 endfunction
