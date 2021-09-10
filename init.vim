@@ -55,7 +55,25 @@ set smarttab
 set autoindent
 set expandtab
 
+" Ignore octal
+set nrformats-=octal
+
 " Use 'jk' for <ESC>
 inoremap jk <ESC>
+
+" Load key mappings
+"source "keymap.vim"
+" Window key map
+let window_group = keys#map_group(keys#leader(), 'w', 'Windows')
+call keys#map_key(window_group, 'h', ':wincmd h<CR>', 'focus-left')
+call keys#map_key(window_group, 'j', ':wincmd j<CR>', 'focus-down')
+call keys#map_key(window_group, 'k', ':wincmd k<CR>', 'focus-up')
+call keys#map_key(window_group, 'l', ':wincmd l<CR>', 'focus-right')
+" Buffer key map
+let buffer_group = keys#map_group(keys#leader(), 'b', 'Buffers')
+call keys#map_key(buffer_group, 'h', ':bprev<CR>', 'previous')
+call keys#map_key(buffer_group, 'j', ':bfirst<CR>', 'first')
+call keys#map_key(buffer_group, 'k', ':blast<CR>', 'last')
+call keys#map_key(buffer_group, 'l', ':bnext<CR>', 'next')
 
 " vim: set noexpandtab:
