@@ -1,3 +1,10 @@
+-- Set leader keys
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ','
+
+-- Configure home screen before Startify plugin is loaded
+require('homescreen')
+
 -- Install plugins
 require('plugins')
 
@@ -15,3 +22,6 @@ vim.o.colorcolumn = '100,120'
 
 -- Show whitespace
 vim.o.list = true
+
+-- Set timeout for which-key
+vim.o.timeoutlen = 500
