@@ -12,6 +12,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 -- Setup plugins here
+-- NOTE:  If this block is changed, you need to run :PackerSync
 packer.startup(function()
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
@@ -19,14 +20,33 @@ packer.startup(function()
     -- Color schemes
     use 'sickill/vim-monokai'
 
+    -- Configure which-key inline so that it's ready by the time other plugins register keymaps
+    use {'folke/which-key.nvim', config = function() require("which-key").setup {
+
+    } end} -- interactive key mapping help
+
     -- UI
-    use {'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}}
-    use {'akinsho/nvim-bufferline.lua', requires = 'kyazdani42/nvim-web-devicons'}
-    use 'mhinz/vim-startify'
-    use 'folke/which-key.nvim'
+    use {'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}} -- helpful status line
+    use 'mhinz/vim-startify' -- helpful startup screen
+    use 'sunjon/shade.nvim' -- dim inactive windows
 
     -- Searching
-    use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}}
+    use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/plenary.nvim'}}} -- fuzzy finder
+    use 'ggandor/lightspeed.nvim' -- one-key text navigation
+
+    -- Code Editing
+    use 'norcalli/nvim-colorizer.lua' -- syntax highlighting
+    use 'folke/zen-mode.nvim' -- distraction-free coding
+    use 'folke/twilight.nvim' -- dim inactive code portions
+    use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}} -- git info integration
+    use {'folke/todo-comments.nvim', requires = 'nvim-lua/plenary.nvim'} -- TODO browser
+
+    -- Productivity
+    use {'nvim-neorg/neorg', requires = 'nvim-lua/plenary.nvim'} -- Life Organization Tool
+
+    -- Utility
+    use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'} -- file browser
+    use {'jghauser/mkdir.nvim', config = function() require('mkdir') end} -- make intermediate dirs when saving
 end)
 
 -- Add an event handler for PackerComplete to run configure_plugins()
