@@ -19,6 +19,8 @@ packer.startup(function()
 
     -- Color schemes
     use 'sickill/vim-monokai'
+    use 'folke/tokyonight.nvim'
+    use 'sainnhe/sonokai'
 
     -- Configure which-key inline so that it's ready by the time other plugins register keymaps
     use {'folke/which-key.nvim', config = function() require("which-key").setup {
