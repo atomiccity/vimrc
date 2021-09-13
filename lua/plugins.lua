@@ -29,6 +29,7 @@ packer.startup(function()
 
     -- UI
     use {'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}} -- helpful status line
+    use {'kdheepak/tabline.nvim', requires = {{'hoob3rt/lualine.nvim', opt=true }, {'kyazdani42/nvim-web-devicons', opt = true}}} -- display buffers/tabs
     use 'mhinz/vim-startify' -- helpful startup screen
     use 'sunjon/shade.nvim' -- dim inactive windows
 
