@@ -50,5 +50,9 @@ wk.register({
     },
     p = {
         name = 'Project'
+    },
+    s = {
+        name = 'Search',
+        c = {'<cmd>noh<cr>', 'Clear highlight'}
     }
 }, {prefix = '<leader>'})

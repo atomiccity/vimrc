@@ -44,3 +44,8 @@ vim.o.relativenumber = true
 -- Set timeout for which-key
 vim.o.timeoutlen = 500
 
+-- Set scroll context
+vim.o.scrolloff = 10
+
+-- Ignore case when searching
+vim.o.ignorecase = true
