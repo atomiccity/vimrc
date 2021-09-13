@@ -8,9 +8,6 @@ require('homescreen')
 -- Install plugins
 require('plugins')
 
--- Set colorscheme
-vim.cmd[[colorscheme tokyonight]]
-
 -- Set font
 vim.o.guifont = 'Hack NF:h10'
 
@@ -47,5 +44,3 @@ vim.o.relativenumber = true
 -- Set timeout for which-key
 vim.o.timeoutlen = 500
 
--- Setup key mappings
-require('keymap')

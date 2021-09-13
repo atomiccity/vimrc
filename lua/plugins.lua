@@ -1,6 +1,3 @@
--- Use packer.nvim for plugin management
-local packer = require('packer')
-
 -- Install the plugin manager if it hasn't been installed already
 local first_time_install = false
 local fn = vim.fn
@@ -10,6 +7,9 @@ if fn.empty(fn.glob(install_path)) > 0 then
     vim.cmd 'packadd packer.nvim'
     first_time_install = true
 end
+
+-- Use packer.nvim for plugin management
+local packer = require('packer')
 
 -- Setup plugins here
 -- NOTE:  If this block is changed, you need to run :PackerSync
@@ -80,4 +80,6 @@ function configure_plugins()
             require('config.'..safe_name)
         end
     end
+
+    require('plugins_ready')
 end
