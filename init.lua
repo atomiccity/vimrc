@@ -37,7 +37,7 @@ vim.o.expandtab = true
 vim.cmd('set nrformats-=octal')
 
 -- Show whitespace
-vim.o.listchars = 'tab:»\\ ,extends:›,precedes:‹,nbsp:·,trail:·'
+vim.o.listchars = 'tab:◀━▶,extends:›,precedes:‹,nbsp:·,trail:·'
 vim.o.list = true
 
 -- Set line numbering
@@ -46,9 +46,6 @@ vim.o.relativenumber = true
 
 -- Set timeout for which-key
 vim.o.timeoutlen = 500
-
--- Use 'jk' instead of ESC in insert mode
-vim.api.nvim_set_keymap('i', 'jk', '<esc>', {noremap = true})
 
 -- Setup key mappings
 require('keymap')
