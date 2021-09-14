@@ -1,3 +1,14 @@
+-- This is a cross-platform (Windows and Linux, at least) init script for
+-- NeoVim.  It uses Packer for plugin management and will bootstrap install
+-- Packer and any configured plugins if Packer isn't found during startup. 
+-- Because of this, the first startup of NeoVim may take awhile.
+--
+-- Prerequisites:
+--   * NeoVim 0.5.0+
+--   * git (for plugin installation)
+--   * Nerd Fonts distribution of the Hack Font (including italic if using TokyoNight theme)
+--   * RipGrep in PATH (for Telescope)
+
 -- Set leader keys
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
@@ -8,8 +19,8 @@ require('homescreen')
 -- Install plugins
 require('plugins')
 
--- Set font
-vim.o.guifont = 'Hack NF:h10'
+-- Set font (Set it in ginit.vim instead)
+-- vim.o.guifont = 'Hack NF:h10'
 
 -- Set default encoding
 vim.o.encoding = 'UTF-8'
@@ -49,3 +60,6 @@ vim.o.scrolloff = 10
 
 -- Ignore case when searching
 vim.o.ignorecase = true
+
+-- Attempt to set colorscheme, but it may fail if colorscheme plugin isn't installed
+vim.cmd('silent! colorscheme tokyonight')
