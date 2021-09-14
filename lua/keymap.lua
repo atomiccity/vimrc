@@ -23,7 +23,7 @@ wk.register({
         k = {'<cmd>bfirst<cr>', 'First buffer'},
         l = {'<cmd>bnext<cr>', 'Next buffer'},
         s = {'<cmd>Startify<cr>', 'Open Welcome screen'},
-        t = {'<cmd>NvimTreeFindFile<cr>', 'FileTree at buffer dir'},
+        f = {'<cmd>NvimTreeFindFile<cr>', 'FileTree at buffer dir'},
         n = {
             name = 'New',
             h = {'<cmd>topleft vertical new<cr>', 'Buffer to left'},
@@ -53,6 +53,19 @@ wk.register({
     },
     s = {
         name = 'Search',
-        c = {'<cmd>noh<cr>', 'Clear highlight'}
-    }
+        c = {'<cmd>noh<cr>', 'Clear highlight'},
+        f = {'<cmd>lua require(\'telescope.builtin\').find_files()<cr>', 'Files'},
+        g = {'<cmd>lua require(\'telescope.builtin\').live_grep()<cr>', 'Live grep'},
+        w = {'<cmd>lua require(\'telescope.builtin\').grep_string()<cr>','Word grep'},
+        b = {'<cmd>lua require(\'telescope.builtin\').buffers()<cr>', 'Buffers'},
+        h = {'<cmd>lua require(\'telescope.builtin\').help_tags()<cr>', 'Help tags'},
+        t = {'<cmd>lua require(\'telescope.builtin\').tags()<cr>', 'Tags'},
+        z = {'<cmd>lua require(\'telescope.builtin\').current_buffer_fuzzy_find()<cr>', 
+            'Fuzzy find'}
+    },
+    g = {
+        name = 'Git',
+        c = {'<cmd>lua require(\'telescope.builtin\').git_commits()<cr>', 'Commits'},
+        b = {'<cmd>lua require(\'telescope.builtin\').git_branches()<cr>', 'Branches'},
+        s = {'<cmd>lua require(\'telescope.builtin\').git_status()<cr>', 'Status'}
 }, {prefix = '<leader>'})
