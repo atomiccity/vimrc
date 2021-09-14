@@ -49,7 +49,11 @@ wk.register({
         p = {'<cmd>wincmd p<cr>', 'Go previous'}
     },
     p = {
-        name = 'Project'
+        name = 'Project',
+        l = {'<cmd>SLoad<cr>', 'Load session'},
+        s = {'<cmd>SSave<cr>', 'Save session'},
+        d = {'<cmd>SDelete<cr>', 'Delete session'},
+        c = {'<cmd>SClose<cr>', 'Close session'}
     },
     s = {
         name = 'Search',
@@ -68,4 +72,5 @@ wk.register({
         c = {'<cmd>lua require(\'telescope.builtin\').git_commits()<cr>', 'Commits'},
         b = {'<cmd>lua require(\'telescope.builtin\').git_branches()<cr>', 'Branches'},
         s = {'<cmd>lua require(\'telescope.builtin\').git_status()<cr>', 'Status'}
+    }
 }, {prefix = '<leader>'})
