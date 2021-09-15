@@ -28,7 +28,7 @@ function plugin#load_all()
         " and git doesn't handle ~ for HOME on Windows.
         let plugin_dir = expand('~/AppData/Local/nvim-plugins')
     else
-        let plugin_dir = '~/.local/share/nvim-plugins
+        let plugin_dir = '~/.local/share/nvim-plugins'
     endif
 
     let dein_dir = plugin_dir . '/repos/github.com/Shougo/dein.vim'
