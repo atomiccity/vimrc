@@ -15,44 +15,73 @@ local packer = require('packer')
 -- NOTE:  If this block is changed, you need to run :PackerSync
 packer.startup(function()
     -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
+    use {'wbthomason/packer.nvim'}
 
     -- Color schemes
-    use 'sickill/vim-monokai'
-    use 'folke/tokyonight.nvim'
-    use 'sainnhe/sonokai'
-
-    -- Configure which-key inline so that it's ready by the time other plugins register keymaps
-    use {'folke/which-key.nvim', config = function() require("which-key").setup {
-
-    } end} -- interactive key mapping help
+    use {'sickill/vim-monokai'}
+    use {'folke/tokyonight.nvim', 
+        config = function() require('config.tokyonight_nvim') end
+    }
+    use {'sainnhe/sonokai'}
 
     -- UI
-    use {'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true}} -- helpful status line
-    use {'kdheepak/tabline.nvim', requires = {
-        {'hoob3rt/lualine.nvim', opt=true }, 
-        {'kyazdani42/nvim-web-devicons', opt = true}}
-    } -- display buffers/tabs
-    use 'mhinz/vim-startify' -- helpful startup screen
-    use 'sunjon/shade.nvim' -- dim inactive windows
+    use {'folke/which-key.nvim'} -- interactive key mapping help
+    use {'hoob3rt/lualine.nvim', -- helpful status line
+        requires = {'kyazdani42/nvim-web-devicons', opt = true},
+        config = function() require('config.lualine_nvim') end
+    }
+    use {'kdheepak/tabline.nvim', -- display buffers/tabs
+        requires = {
+            {'hoob3rt/lualine.nvim', opt=true}, 
+            {'kyazdani42/nvim-web-devicons', opt=true}
+        },
+        config = function() require('config.tabline_nvim') end
+    }
+    use {'mhinz/vim-startify'} -- helpful startup screen
+    use {'sunjon/shade.nvim', -- dim inactive windows
+        config = function() require('config.shade_nvim') end
+    }
 
     -- Searching
-    use {'nvim-telescope/telescope.nvim', requires = {{'nvim-lua/plenary.nvim'}}} -- fuzzy finder
-    use 'ggandor/lightspeed.nvim' -- one-key text navigation
+    use {'nvim-telescope/telescope.nvim', -- fuzzy finder
+        requires = {'nvim-lua/plenary.nvim'},
+        config = function() require('config.telescope_nvim') end
+    }
+    use {'ggandor/lightspeed.nvim'} -- one-key text navigation
 
     -- Code Editing
-    use 'norcalli/nvim-colorizer.lua' -- syntax highlighting
-    use 'folke/zen-mode.nvim' -- distraction-free coding
-    use 'folke/twilight.nvim' -- dim inactive code portions
-    use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}} -- git info integration
-    use {'folke/todo-comments.nvim', requires = 'nvim-lua/plenary.nvim'} -- TODO browser
+    use {'norcalli/nvim-colorizer.lua', -- syntax highlighting
+        config = function() require('config.nvim-colorizer_lua') end
+    }
+    use {'folke/zen-mode.nvim', -- distraction-free coding
+        config = function() require('config.zen-mode_nvim') end
+    }
+    use {'folke/twilight.nvim', -- dim inactive code portions
+        config = function() require('config.twilight_nvim') end
+    }
+    use {'lewis6991/gitsigns.nvim', -- git info integration
+        requires = {'nvim-lua/plenary.nvim'},
+        config = function() require('config.gitsigns_nvim') end
+    }
+    use {'folke/todo-comments.nvim', -- TODO browser
+        requires = 'nvim-lua/plenary.nvim',
+        config = function() require('config.todo-comments_nvim') end
+    }
 
     -- Productivity
-    use {'nvim-neorg/neorg', requires = 'nvim-lua/plenary.nvim'} -- Life Organization Tool
+    use {'nvim-neorg/neorg', -- Life Organization Tool
+        requires = 'nvim-lua/plenary.nvim',
+        config = function() require('config.neorg') end
+    } 
 
     -- Utility
-    use {'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'} -- file browser
-    use {'jghauser/mkdir.nvim', config = function() require('mkdir') end} -- make intermediate dirs when saving
+    use {'kyazdani42/nvim-tree.lua', -- file browser
+        requires = 'kyazdani42/nvim-web-devicons',
+        config = function() require('config.nvim-tree_lua') end
+    } 
+    use {'jghauser/mkdir.nvim', -- make intermediate dirs when saving
+        config = function() require('mkdir') end
+    } 
 end)
 
 -- Add an event handler for PackerComplete to run configure_plugins()
@@ -63,26 +92,5 @@ vim.cmd([[
     augroup end
 ]])
 
--- Install any plugins that need installed
--- NOTE:  Sometimes a PackerSync is required.  Look into why.
-packer.install()
-
--- Helper function used to see if plugin config exists
-local function file_exists(fname)
-    local stat = vim.loop.fs_stat(fname)
-    return (stat and stat.type) or false
-end
-
--- Function to call configuration scripts for each loaded plugin (needs to be called after
--- the PackerComplete user event)
-function configure_plugins()
-    for k,v in pairs(_G.packer_plugins) do
-        local safe_name = k:gsub('%.', '_')
-        local plugin_cfg = fn.stdpath('config')..'/lua/config/'..safe_name..'.lua'
-        if v.loaded and file_exists(plugin_cfg) then
-            require('config.'..safe_name)
-        end
-    end
-
-    require('plugins_ready')
-end
+-- At this point, all plugins should be configured, so call plugins_ready script
+require('plugins_ready')
