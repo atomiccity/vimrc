@@ -73,4 +73,4 @@ wk.register({
         b = {'<cmd>lua require(\'telescope.builtin\').git_branches()<cr>', 'Branches'},
         s = {'<cmd>lua require(\'telescope.builtin\').git_status()<cr>', 'Status'}
     }
-}, {prefix = '<leader>'})
+}, {mode = 'n', prefix = '<leader>'})
