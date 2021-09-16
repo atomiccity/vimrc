@@ -8,6 +8,15 @@
 --   * git (for plugin installation)
 --   * Nerd Fonts distribution of the Hack Font (including italic if using TokyoNight theme)
 --   * RipGrep in PATH (for Telescope)
+--
+-- Installation:
+--   After you first install these init scripts, run the following to install 
+--   any necessary plugins:
+--
+--   nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+--
+--   That command will install Packer, any required plugins, and then exit. 
+--   After that, you should be able to run NeoVim normally.
 
 -- Set leader keys
 vim.g.mapleader = ' '
